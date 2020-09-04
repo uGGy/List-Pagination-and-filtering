@@ -18,7 +18,6 @@ FSJS project 2 - List Filter and Pagination
 ***/
 
 const studentList = document.querySelectorAll(".student-item");
-const itemsPerPage = 9;
 
 /*** 
    Create the `showPage` function to hide all of the items in the 
@@ -34,11 +33,15 @@ const itemsPerPage = 9;
        that will be passed into the parens later when you call or 
        "invoke" the function 
 ***/
+let startIndex = 0;
+let endIndex = 9;
+
 
 function showPage(list, page) {
-   const startIndex = (page * itemsPerPage) - itemsPerPage;
-   const endIndex = page * itemsPerPage;
-   list = studentList;
+   page >=  1 ?  (endIndex = 9 + ((page - 1) * 10), 
+  startIndex =  0 + ((page - 1) * 10)) : (endIndex, startIndex);
+   
+      list = studentList;
       for (let i = 0; i < list.length; i ++) {
          if (i >= startIndex && i <= endIndex) {
             list[i].style.display = 'block';
@@ -72,7 +75,7 @@ function appendPageLinks (list) {
 
    list = studentList;
    let currentPage = 1;
-   const NumberOfPage = (Math.ceil(studentList.length / itemsPerPage));
+  const NumberOfPage = (Math.ceil(studentList.length / 10));
 
 
    let divPagination = document.createElement('div');
